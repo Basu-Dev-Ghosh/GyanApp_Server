@@ -4,8 +4,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-require('./db/conn')
-const router=require('./routers/router')
+require("./db/conn");
+const router = require("./routers/router");
 const port = process.env.PORT || 4000;
 
 app.use(cors({ origin: true, credentials: true }));
@@ -13,6 +13,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
+
+app.get("/", (req, res) => {
+  res.send("hello basu");
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
